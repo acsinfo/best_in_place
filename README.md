@@ -33,7 +33,7 @@ The editor works by PUTting the updated value to the server and GETting the upda
 - Custom display methods using a method from your model or an existing rails
   view helper
 
-##Usage of Rails 3 Gem
+##Usage
 
 ###best_in_place
 **best_in_place object, field, OPTIONS**
@@ -45,7 +45,7 @@ Params:
 
 Options:
 
-- **:type** It can be only [:input, :textarea, :select, :checkbox, :date (>= 1.0.4)] or if undefined it defaults to :input.
+- **:type** It can be only [:input, :textarea, :select, :checkbox, :date (>= 1.0.4)] or if undefined it defaults to :input. *Selects are initialized by default with Chosen, a jQuery based replacement for select boxes that supports searching, remote data sets, and infinite scrolling of results.* 
 - **:collection**: In case you are using the :select type then you must specify the collection of values it takes. In case you are
   using the :checkbox type you can specify the two values it can take, or otherwise they will default to Yes and No.
 - **:path**: URL to which the updating action will be sent. If not defined it defaults to the :object path.
@@ -319,6 +319,7 @@ you want to use jQuery UI datepickers:
 
     //= require jquery
     //= require jquery-ui
+    //= require chosen.jquery
     //= require best_in_place
 
 If you want to use jQuery UI datepickers, you should also install and
@@ -333,41 +334,6 @@ Then, just add a binding to prepare all best in place fields when the document i
 
 You are done!
 
-###Rails 3.0 and lower
-
-Installing *best_in_place* for Rails 3.0 or below is a little bit
-different, since the master branch is specifically updated for Rails
-3.1. But don't be scared, you'll be fine!
-
-Rails 3.0 support will be held in the 0.2.X versions, but we have planned not to continue developing for this version of Rails. Nevertheless, you can by implementing what you want and sending us a pull request.
-
-First, add the gem's 0.2 version in the Gemfile:
-
-    gem "best_in_place", "~> 0.2.0"
-
-After that, install and load all the javascripts from the folder
-**/public/javascripts** in your layouts. They have to be in the order:
-
-* jquery
-* **best_in_place**
-
-You can automatize this installation by doing
-
-    rails g best_in_place:setup
-
-If you want to use jQuery UI datepickers, you should also install and
-load jquery-ui.js as well as your preferred jquery-ui CSS file and
-associated assets.
-
-Finally, as for Rails 3.1, just add a binding to prepare all best in place fields when the document is ready:
-
-    $(document).ready(function() {
-      /* Activating Best In Place */
-      jQuery(".best_in_place").best_in_place();
-    });
-
----
-
 ## Notification
 
 Sometimes your in-place updates will fail due to validation or for some other reason. In such case, you'll want to notify the user somehow. **Best in Place** supports doing so through the best_in_place:error event, and has built-in support for notification via jquery.purr, right out of the box.
@@ -379,13 +345,6 @@ To opt into the jquery.purr error notification, just add best_in_place.purr to y
 It's as simple as adding:
 
     //= require best_in_place.purr
-
-###Rails 3.0 and lower
-
-You'll have to load the following additional javascripts, in this order, after loading jquery and **best_in_place**:
-
- * jquery.purr
- * **best_in_place.purr**
 
 ---
 
